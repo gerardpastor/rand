@@ -1,5 +1,11 @@
 # @gerardpastor/rand
 
+## 0.0.3
+
+### Patch Changes
+
+- 61c9b01: Improved documentation
+
 ## 0.0.2
 
 ### Patch Changes
