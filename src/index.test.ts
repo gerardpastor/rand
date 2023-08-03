@@ -10,7 +10,6 @@ import {
   randKey,
   randValue,
   randWeightedValue,
-  randNormal,
 } from "./index";
 
 describe("randBelow", () => {
@@ -574,40 +573,4 @@ describe("randWeightedValue", () => {
       expect(randomValue).toBe("orange");
     },
   );
-});
-
-describe("randNormal", () => {
-  it.concurrent("randNormal should return a random number with a normal distribution", async ({ expect }) => {
-    const mean = 0;
-    const standardDeviation = 1;
-    const randomValue = randNormal(mean, standardDeviation);
-    expect(typeof randomValue).toBe("number");
-  });
-
-  it.concurrent("randNormal should return different values for different calls", async ({ expect }) => {
-    const mean = 0;
-    const standardDeviation = 1;
-    const randomValue1 = randNormal(mean, standardDeviation);
-    const randomValue2 = randNormal(mean, standardDeviation);
-    expect(randomValue1).not.toBe(randomValue2);
-  });
-
-  it.concurrent(
-    "randNormal should return values close to the mean with a high standard deviation",
-    async ({ expect }) => {
-      const mean = 100;
-      const standardDeviation = 50;
-      const randomValue = randNormal(mean, standardDeviation);
-      expect(randomValue).toBeGreaterThan(mean - 3 * standardDeviation);
-      expect(randomValue).toBeLessThan(mean + 3 * standardDeviation);
-    },
-  );
-
-  it.concurrent("randNormal should return values with a custom random function", async ({ expect }) => {
-    const customRandFn = () => 1; // Always return 0, which should be the mean value
-    const mean = 100;
-    const standardDeviation = 50;
-    const randomValue = randNormal(mean, standardDeviation, customRandFn);
-    expect(randomValue).toBe(mean);
-  });
 });

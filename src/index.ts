@@ -147,23 +147,6 @@ export function randWeightedValue<T extends { [key: string]: number }>(
   return Object.keys(weightedValues)[0] as string;
 }
 
-/**
- * Generate a random number with a normal distribution (gaussian).
- * @param mean - The mean (average) of the normal distribution.
- * @param standardDeviation - The standard deviation of the normal distribution.
- * @param customRandFn - Optional custom random function. If provided, it will be used instead of Math.random().
- * @returns A random number with a normal distribution.
- */
-export function randNormal(mean: number, standardDeviation: number, customRandFn?: () => number): number {
-  const randFn = customRandFn ?? Math.random;
-  let u = 0;
-  let v = 0;
-  while (u === 0) u = randFn(); // Converting [0,1) to (0,1)
-  while (v === 0) v = randFn();
-  const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-  return mean + z * standardDeviation;
-}
-
 export default {
   below: randBelow,
   range: randRange,
@@ -175,5 +158,4 @@ export default {
   key: randKey,
   value: randValue,
   weightedValue: randWeightedValue,
-  normal: randNormal,
 };
